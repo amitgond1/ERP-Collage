@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ERP System - Business Management Solution</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+  
+    .hero-section {
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      color: white;
+      padding: 6rem 0;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #3498db;
+      margin-bottom: 1rem;
+      background: rgba(52, 152, 219, 0.1);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .feature-card {
+      transition: all 0.3s;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cta-section {
+      background-color: #f8f9fa;
+      padding: 5rem 0;
+      margin-top: 3rem;
+      background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      position: relative;
+      color: white;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .stats-item {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #3498db;
+      margin-bottom: 0.5rem;
+    }
+    
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s;
+      background-color: #343a40;
+    }
+    
+    .navbar.scrolled {
+      background-color: #212529 !important;
+      padding: 0.5rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .report-section {
+      padding: 5rem 0;
+    }
+
+    .report-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      height: 100%;
+    }
+
+    .report-header {
+      background-color: #3498db;
+      color: white;
+      padding: 1.5rem;
+    }
+
+    .report-body {
+      padding: 1.5rem;
+      background-color: white;
+    }
+
+    .report-table {
+      width: 100%;
+    }
+
+    .report-table th {
+      background-color: #f8f9fa;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .report-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 250px;
+      margin-bottom: 1.5rem;
+    }
+
+    .report-summary {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .summary-item {
+      text-align: center;
+    }
+
+    .summary-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #3498db;
+    }
+
+    .summary-label {
+      color: #6c757d;
+      font-size: 0.875rem;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 4rem 0;
+      }
+      
+      .display-4 {
+        font-size: 2.5rem;
+      }
+      
+      .feature-card {
+        margin-bottom: 1.5rem;
+      }
+      
+      .stats-item {
+        padding: 1rem;
+      }
+      
+      .stats-number {
+        font-size: 2rem;
+      }
+
+      .report-section {
+        padding: 3rem 0;
+      }
+
+      .report-summary {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .chart-container {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fas fa-store me-2"></i>ERP System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reports">Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section" id="home">
+    <div class="container hero-content text-center">
+      <h1 class="display-4 fw-bold mb-4">Transform Your Business Operations</h1>
+      <p class="lead mb-5">Comprehensive ERP solution to manage sales, inventory, and customers in one powerful platform designed for growing businesses.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="login.html" class="btn btn-light btn-lg px-4 py-3">Get Started Free</a>
+        <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="container my-5 py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Powerful Features</h2>
+      <p class="lead text-muted">Everything you need to manage your business efficiently</p>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card feature-card shadow">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h4>Sales Tracking</h4>
+          <p>Monitor your sales performance with real-time analytics, customer insights, and detailed reports to drive growth.</p>
+          <a href="#sales-report" class="text-primary text-decoration-none">View Report <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card feature-card shadow">
+          <div class="feature-icon">
+            <i class="fas fa-boxes"></i>
+          </div>
+          <h4>Inventory Management</h4>
+          <p>Automated stock tracking with low-level alerts, barcode support, and supplier management for optimal inventory.</p>
+          <a href="#inventory-report" class="text-primary text-decoration-none">View Report <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card feature-card shadow">
+          <div class="feature-icon">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <h4>Financial Reports</h4>
+          <p>Generate P&L statements, balance sheets, and tax reports with automated calculations and exports.</p>
+          <a href="#financial-report" class="text-primary text-decoration-none">View Report <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-3 col-6">
+          <div class="stats-item">
+            <div class="stats-number">500+</div>
+            <div class="text-muted">Businesses</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-item">
+            <div class="stats-number">24/7</div>
+            <div class="text-muted">Support</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-item">
+            <div class="stats-number">99.9%</div>
+            <div class="text-muted">Uptime</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-item">
+            <div class="stats-number">45+</div>
+            <div class="text-muted">Features</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reports" class="report-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Business Reports</h2>
+        <p class="lead text-muted">Comprehensive insights to drive your business decisions</p>
+      </div>
+
+      <!-- Sales Report -->
+      <div id="sales-report" class="row mb-5">
+        <div class="col-12 mb-4">
+          <h3><i class="fas fa-chart-line text-primary me-2"></i> Sales Report</h3>
+        </div>
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Monthly Sales Performance</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Product A</td>
+                    <td>120</td>
+                    <td>₹24,000</td>
+                  </tr>
+                  <tr>
+                    <td>Product B</td>
+                    <td>85</td>
+                    <td>₹42,500</td>
+                  </tr>
+                  <tr>
+                    <td>Product C</td>
+                    <td>64</td>
+                    <td>₹19,200</td>
+                  </tr>
+                  <tr>
+                    <td>Product D</td>
+                    <td>92</td>
+                    <td>₹36,800</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="report-summary">
+                <div class="summary-item">
+                  <div class="summary-value">₹122,500</div>
+                  <div class="summary-label">Total Revenue</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">361</div>
+                  <div class="summary-label">Units Sold</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">12.5%</div>
+                  <div class="summary-label">Growth</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Top Customers</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="customerChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Orders</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>ABC Corporation</td>
+                    <td>15</td>
+                    <td>₹32,500</td>
+                  </tr>
+                  <tr>
+                    <td>XYZ Enterprises</td>
+                    <td>12</td>
+                    <td>₹28,750</td>
+                  </tr>
+                  <tr>
+                    <td>Global Traders</td>
+                    <td>8</td>
+                    <td>₹18,200</td>
+                  </tr>
+                  <tr>
+                    <td>Best Buy Stores</td>
+                    <td>6</td>
+                    <td>₹15,800</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Report -->
+      <div id="inventory-report" class="row mb-5">
+        <div class="col-12 mb-4">
+          <h3><i class="fas fa-boxes text-primary me-2"></i> Inventory Report</h3>
+        </div>
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Stock Levels</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="inventoryChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Current Stock</th>
+                    <th>Reorder Level</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Product A</td>
+                    <td>85</td>
+                    <td>50</td>
+                    <td><span class="badge bg-success">In Stock</span></td>
+                  </tr>
+                  <tr>
+                    <td>Product B</td>
+                    <td>42</td>
+                    <td>60</td>
+                    <td><span class="badge bg-warning text-dark">Low Stock</span></td>
+                  </tr>
+                  <tr>
+                    <td>Product C</td>
+                    <td>12</td>
+                    <td>30</td>
+                    <td><span class="badge bg-danger">Critical</span></td>
+                  </tr>
+                  <tr>
+                    <td>Product D</td>
+                    <td>65</td>
+                    <td>40</td>
+                    <td><span class="badge bg-success">In Stock</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="report-summary">
+                <div class="summary-item">
+                  <div class="summary-value">204</div>
+                  <div class="summary-label">Total Items</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">3</div>
+                  <div class="summary-label">Need Reorder</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">₹85,200</div>
+                  <div class="summary-label">Inventory Value</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Recent Movements</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="movementChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2023-06-15</td>
+                    <td>Product A</td>
+                    <td>Sale</td>
+                    <td>-12</td>
+                  </tr>
+                  <tr>
+                    <td>2023-06-14</td>
+                    <td>Product B</td>
+                    <td>Purchase</td>
+                    <td>+30</td>
+                  </tr>
+                  <tr>
+                    <td>2023-06-13</td>
+                    <td>Product C</td>
+                    <td>Sale</td>
+                    <td>-8</td>
+                  </tr>
+                  <tr>
+                    <td>2023-06-12</td>
+                    <td>Product D</td>
+                    <td>Sale</td>
+                    <td>-15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Report -->
+      <div id="financial-report" class="row">
+        <div class="col-12 mb-4">
+          <h3><i class="fas fa-file-invoice-dollar text-primary me-2"></i> Financial Report</h3>
+        </div>
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Profit & Loss</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="profitLossChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Total Revenue</td>
+                    <td>₹122,500</td>
+                  </tr>
+                  <tr>
+                    <td>Cost of Goods</td>
+                    <td>₹68,200</td>
+                  </tr>
+                  <tr>
+                    <td>Gross Profit</td>
+                    <td>₹54,300</td>
+                  </tr>
+                  <tr>
+                    <td>Operating Expenses</td>
+                    <td>₹32,500</td>
+                  </tr>
+                  <tr>
+                    <td>Net Profit</td>
+                    <td>₹21,800</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="report-card">
+            <div class="report-header">
+              <h4 class="mb-0">Balance Sheet</h4>
+            </div>
+            <div class="report-body">
+              <div class="chart-container">
+                <canvas id="balanceSheetChart"></canvas>
+              </div>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Account</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Assets</strong></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Cash</td>
+                    <td>₹45,200</td>
+                  </tr>
+                  <tr>
+                    <td>Accounts Receivable</td>
+                    <td>₹32,500</td>
+                  </tr>
+                  <tr>
+                    <td>Inventory</td>
+                    <td>₹85,200</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Liabilities</strong></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Accounts Payable</td>
+                    <td>₹28,700</td>
+                  </tr>
+                  <tr>
+                    <td>Loans</td>
+                    <td>₹50,000</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Equity</strong></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Retained Earnings</td>
+                    <td>₹84,200</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="report-summary mt-3">
+                <div class="summary-item">
+                  <div class="summary-value">₹162,900</div>
+                  <div class="summary-label">Total Assets</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">₹78,700</div>
+                  <div class="summary-label">Total Liabilities</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-value">₹84,200</div>
+                  <div class="summary-label">Total Equity</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container my-5 py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4">About Our ERP System</h2>
+        <p class="lead">Our ERP system is designed specifically for small and medium businesses to help you manage your operations more efficiently.</p>
+        <p>With intuitive interfaces and powerful features, you can focus on growing your business while we handle the complexity of managing your data. Our solution integrates all aspects of your business into one seamless platform.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Easy to use interface with minimal training</li>
+          <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Mobile responsive design for on-the-go access</li>
+          <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Bank-grade security for your data</li>
+          <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 24/7 customer support with real experts</li>
+          <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Regular updates with new features</li>
+        </ul>
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ERP System Dashboard" class="img-fluid rounded shadow-lg">
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section py-5">
+    <div class="container text-center cta-content">
+      <h2 class="fw-bold mb-4">Ready to Transform Your Business?</h2>
+      <p class="lead mb-5">Join thousands of businesses that are already managing their operations more efficiently with our ERP solution.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="login.html" class="btn btn-primary btn-lg px-5 py-3">Start Your Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="mb-3">ERP System</h5>
+          <p>Helping businesses streamline operations and grow since 2025. Our mission is to make enterprise-grade tools accessible to businesses of all sizes.</p>
+          <div class="d-flex gap-3 mt-4">
+            <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#home" class="text-white text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#features" class="text-white text-decoration-none">Features</a></li>
+            <li class="mb-2"><a href="#reports" class="text-white text-decoration-none">Reports</a></li>
+            <li class="mb-2"><a href="#about" class="text-white text-decoration-none">About</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5 class="mb-3">Products</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-white text-decoration-none">ERP Pro</a></li>
+            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inventory Manager</a></li>
+            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sales Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5 class="mb-3">Contact Us</h5>
+          <p><i class="fas fa-map-marker-alt me-2"></i> kdk collage nagpur</p>
+          <p><i class="fas fa-phone me-2"></i> +91 9xxx xxx xxx</p>
+          <p><i class="fas fa-envelope me-2"></i> support@erpsystem.com</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2025 ERP System. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="mb-0">
+            <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
+            <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Initialize all charts when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // sabko dom me lena hai 
+
+
+      // Sales Trend Chart
+      const salesCtx = document.getElementById('salesChart').getContext('2d');
+      const salesChart = new Chart(salesCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Monthly Sales (₹)',
+            data: [85000, 92000, 105000, 112000, 125000, 122500],
+            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+            borderColor: 'rgba(52, 152, 219, 1)',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Customer Distribution Chart
+      const customerCtx = document.getElementById('customerChart').getContext('2d');
+      const customerChart = new Chart(customerCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['ABC Corporation', 'XYZ Enterprises', 'Global Traders', 'Best Buy Stores', 'Others'],
+          datasets: [{
+            data: [32500, 28750, 18200, 15800, 27250],
+            backgroundColor: [
+              'rgba(52, 152, 219, 0.8)',
+              'rgba(155, 89, 182, 0.8)',
+              'rgba(46, 204, 113, 0.8)',
+              'rgba(241, 196, 15, 0.8)',
+              'rgba(231, 76, 60, 0.8)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ₹${context.raw.toLocaleString()}`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Inventory Levels Chart
+      const inventoryCtx = document.getElementById('inventoryChart').getContext('2d');
+      const inventoryChart = new Chart(inventoryCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+          datasets: [
+            {
+              label: 'Current Stock',
+              data: [85, 42, 12, 65],
+              backgroundColor: 'rgba(52, 152, 219, 0.8)',
+              borderWidth: 0
+            },
+            {
+              label: 'Reorder Level',
+              data: [50, 60, 30, 40],
+              backgroundColor: 'rgba(231, 76, 60, 0.8)',
+              borderWidth: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Inventory Movement Chart
+      const movementCtx = document.getElementById('movementChart').getContext('2d');
+      const movementChart = new Chart(movementCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jun 1', 'Jun 5', 'Jun 10', 'Jun 15'],
+          datasets: [
+            {
+              label: 'Product A',
+              data: [120, 110, 97, 85],
+              borderColor: 'rgba(52, 152, 219, 1)',
+              backgroundColor: 'rgba(52, 152, 219, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            },
+            {
+              label: 'Product B',
+              data: [60, 55, 45, 42],
+              borderColor: 'rgba(155, 89, 182, 1)',
+              backgroundColor: 'rgba(155, 89, 182, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Profit & Loss Chart
+      const profitLossCtx = document.getElementById('profitLossChart').getContext('2d');
+      const profitLossChart = new Chart(profitLossCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Revenue', 'COGS', 'Gross Profit', 'Expenses', 'Net Profit'],
+          datasets: [{
+            label: 'Amount (₹)',
+            data: [122500, 68200, 54300, 32500, 21800],
+            backgroundColor: [
+              'rgba(46, 204, 113, 0.8)',
+              'rgba(231, 76, 60, 0.8)',
+              'rgba(52, 152, 219, 0.8)',
+              'rgba(241, 196, 15, 0.8)',
+              'rgba(155, 89, 182, 0.8)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Balance Sheet Chart
+      const balanceSheetCtx = document.getElementById('balanceSheetChart').getContext('2d');
+      const balanceSheetChart = new Chart(balanceSheetCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Cash', 'Accounts Receivable', 'Inventory', 'Accounts Payable', 'Loans', 'Equity'],
+          datasets: [{
+            data: [45200, 32500, 85200, 28700, 50000, 84200],
+            backgroundColor: [
+              'rgba(46, 204, 113, 0.8)',
+              'rgba(52, 152, 219, 0.8)',
+              'rgba(155, 89, 182, 0.8)',
+              'rgba(231, 76, 60, 0.8)',
+              'rgba(241, 196, 15, 0.8)',
+              'rgba(26, 188, 156, 0.8)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ₹${context.raw.toLocaleString()}`;
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

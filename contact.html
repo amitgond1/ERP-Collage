@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP System - Contact Us</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="dashboard.html">ERP Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="sales.html">Sales</a></li>
+          <li class="nav-item"><a class="nav-link" href="inventory.html">Inventory</a></li>
+          <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-envelope me-2"></i>Contact Form</h5>
+          </div>
+          <div class="card-body">
+            <form id="contactForm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="contactName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="contactName" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="contactEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="contactEmail" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="contactSubject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="contactSubject" required>
+              </div>
+              <div class="mb-3">
+                <label for="contactMessage" class="form-label">Message</label>
+                <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane me-2"></i>Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Contact Information</h5>
+          </div>
+          <div class="card-body">
+            <h6><i class="fas fa-map-marker-alt text-danger me-2"></i>Address</h6>
+            <p class="mb-4">123 Business Park, Sector 22<br>Mumbai, Maharashtra 400001</p>
+            
+            <h6><i class="fas fa-phone text-primary me-2"></i>Phone</h6>
+            <p class="mb-4">+91 98765 43210<br>+91 22 1234 5678</p>
+            
+            <h6><i class="fas fa-envelope text-success me-2"></i>Email</h6>
+            <p class="mb-4">support@erpsystem.com<br>sales@erpsystem.com</p>
+            
+            <h6><i class="fas fa-clock text-warning me-2"></i>Business Hours</h6>
+            <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 2:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0"><i class="fas fa-map-marked-alt me-2"></i>Our Location</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="ratio ratio-16x9">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.715709417677!2d72.8328643149006!3d19.04574668711176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8df05df9e29%3A0x8a4a8e9e4a8e9e4a!2sBusiness%20Park%2C%20Sector%2022%2C%20Mumbai%2C%20Maharashtra%20400001!5e0!3m2!1sen!2sin!4v1623945678901!5m2!1sen!2sin" 
+                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
